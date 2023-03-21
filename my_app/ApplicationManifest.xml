@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest
+  ApplicationTypeName="MyGuestAppType"
+  ApplicationTypeVersion="1.0.0"
+  xmlns="http://schemas.microsoft.com/2011/01/fabric"
+  xmlns:xsd="https://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance">
+
+  <Parameters>
+    <Parameter Name="Environment" DefaultValue="SomeValue" />
+  </Parameters>
+
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="my_service_pkg" ServiceManifestVersion="1.0.0" />
+
+    <EnvironmentOverrides CodePackageRef="code">
+      <EnvironmentVariable Name="VariableName" Value="[Environment]" />
+    </EnvironmentOverrides>
+
+    <!--
+    <Policies>
+      <RunAsPolicy CodePackageRef="code" UserRef="LocalSystemUser" EntryPointType="Setup" />
+      <RunAsPolicy CodePackageRef="code" UserRef="LocalSystemUser" EntryPointType="Main" />
+    </Policies>
+    -->
+
+  </ServiceManifestImport>
+
+  <DefaultServices>
+    <Service Name="MyService">
+      <StatelessService ServiceTypeName="MyServiceType" InstanceCount="1">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

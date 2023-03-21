@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+The Name attribute of the ServiceManifest element must match the directory name
+containing the ServiceManifest.xml file.
+-->
+<ServiceManifest
+  Name="my_service_pkg"
+  Version="1.0.0"
+  xmlns="http://schemas.microsoft.com/2011/01/fabric"
+  xmlns:xsd="https://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance">
+
+  <ServiceTypes>
+    <StatelessServiceType ServiceTypeName="MyServiceType" UseImplicitHost="true" />
+  </ServiceTypes>
+
+  <CodePackage Name="code" Version="1.0.0">
+    <!-- SetupEntryPoint>
+      <ExeHost>
+        <Program></Program>
+      </ExeHost>
+    </SetupEntryPoint -->
+
+    <EntryPoint>
+      <ExeHost>
+        <Program>start.sh</Program>
+        <WorkingFolder>CodeBase</WorkingFolder>
+        <ConsoleRedirection FileRetentionCount="5" FileMaxSizeInKb="2048"/>
+      </ExeHost>
+    </EntryPoint>
+
+    <EnvironmentVariables>
+      <EnvironmentVariable Name="VariableName" Value="VariableValue"/>
+    </EnvironmentVariables>
+
+  </CodePackage>
+
+</ServiceManifest>
